@@ -28,20 +28,38 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*result;
 	size_t	s1_len;
 	size_t	s2_len;
+	size_t	i;
 
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-
 	result = malloc(s1_len + s2_len + 1);
 	if (!result)
 	{
 		return (NULL);
 	}
-	result = 
-
-
-
-
-
+	i = 0;
+	while (s1_len)
+	{
+		result[i] = s1[i + 1];
+		i++;
+	}
+	while (s2_len)
+	i = 0;
+	{
+		result[i + s1_len] = s2[i];
+		i++;
+	}
+	return (result);
 }
 
+
+int main()
+{
+	char *string;
+	char *string1;
+
+	string = "j'adore les chats";
+	string1 = "j'adore les chats";
+
+	printf("%s\n", ft_strjoin(string, string1));
+}

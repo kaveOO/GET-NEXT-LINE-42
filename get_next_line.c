@@ -18,5 +18,4 @@ char	*get_next_line(int fd)
 	size_t		i;
 
 
-
 }

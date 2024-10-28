@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 01:26:00 by albillie          #+#    #+#             */
-/*   Updated: 2024/10/28 04:09:53 by albillie         ###   ########.fr       */
+/*   Updated: 2024/10/28 06:49:29 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,14 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	}
 	i = 0;
-	while (s1_len)
+	while (s1[i])
 	{
-		result[i] = s1[i + 1];
+		result[i] = s1[i];
 		i++;
 	}
-	while (s2_len)
-	i = 0;
-	{
-		result[i + s1_len] = s2[i];
-		i++;
-	}
+	printf("%ld\n", i);
 	return (result);
 }
-
 
 int main()
 {

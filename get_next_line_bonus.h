@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 01:53:50 by albillie          #+#    #+#             */
-/*   Updated: 2024/11/03 06:47:19 by albillie         ###   ########.fr       */
+/*   Created: 2024/11/02 01:56:20 by albillie          #+#    #+#             */
+/*   Updated: 2024/11/03 06:47:36 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 15
 # endif
+
+# define MAX_FD 1024
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -27,8 +29,8 @@ size_t	ft_strlen(char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 void	fill_str(char *res, char *s1, char *s2);
-char	*fill_line_buffer(int fd, char *left_c, char *buffer);
 char	*set_line(char *line_buffer);
+char	*fill_line_buffer(int fd, char *left_c, char *buffer);
 char	*ft_strchr(char *s, int c);
 
 #endif

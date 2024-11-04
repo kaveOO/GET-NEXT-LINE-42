@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:53:50 by albillie          #+#    #+#             */
-/*   Updated: 2024/11/03 07:14:38 by albillie         ###   ########.fr       */
+/*   Updated: 2024/11/03 20:17:29 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 char	*get_next_line(int fd);
 char	*ft_strdup(char *s);

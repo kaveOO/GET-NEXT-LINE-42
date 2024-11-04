@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:55:58 by albillie          #+#    #+#             */
-/*   Updated: 2024/11/03 07:14:15 by albillie         ###   ########.fr       */
+/*   Updated: 2024/11/03 21:14:52 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,19 @@ char	*ft_strchr(char *s, int c)
 	if (s[i] == cc)
 		return ((char *)&s[i]);
 	return (NULL);
+}
+
+int main()
+{
+	int fd;
+
+	fd = open("test.txt", O_RDONLY);
+
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 }

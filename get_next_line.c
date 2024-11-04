@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:53:11 by albillie          #+#    #+#             */
-/*   Updated: 2024/11/03 07:14:32 by albillie         ###   ########.fr       */
+/*   Updated: 2024/11/04 22:56:37 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buffer;
 
-	buffer = malloc ((BUFFER_SIZE + 1));
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		free(left_c);
@@ -112,3 +112,21 @@ char	*ft_strchr(char *s, int c)
 	}
 	return (NULL);
 }
+
+/* int main()
+{
+	int fd;
+
+	fd = open("test.txt", O_RDONLY);
+
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+} */

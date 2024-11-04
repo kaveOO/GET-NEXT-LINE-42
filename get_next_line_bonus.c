@@ -6,7 +6,7 @@
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 01:55:58 by albillie          #+#    #+#             */
-/*   Updated: 2024/11/03 21:14:52 by albillie         ###   ########.fr       */
+/*   Updated: 2024/11/04 23:40:46 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,10 @@ char	*ft_strchr(char *s, int c)
 	return (NULL);
 }
 
-int main()
+/* int main()
 {
 	int fd;
+	int fd1;
 
 	fd = open("test.txt", O_RDONLY);
 	fd1 = open("test1.txt", O_RDONLY);
@@ -115,10 +116,10 @@ int main()
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 
-	printf("%s", get_next_line(fd1`));
+	printf("%s", get_next_line(fd1));
 	printf("%s", get_next_line(fd1));
 
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
-}
+} */

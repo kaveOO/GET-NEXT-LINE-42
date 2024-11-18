@@ -5,121 +5,138 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: albillie <albillie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 01:55:58 by albillie          #+#    #+#             */
-/*   Updated: 2024/11/04 23:40:46 by albillie         ###   ########.fr       */
+/*   Created: 2024/11/18 00:40:14 by albillie          #+#    #+#             */
+/*   Updated: 2024/11/18 01:23:22 by albillie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
+char	*fill_line_buffer(int fd, char *left_c)
+{
+	char	*buffer;
+	char	*temp;
+	ssize_t	b_read;
+
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	if (!left_c)
+		left_c = ft_strdup("");
+	if (!left_c)
+		return (free(buffer), NULL);
+	b_read = 1;
+	while (b_read > 0 && !ft_strchr(left_c, '\n'))
+	{
+		b_read = read(fd, buffer, BUFFER_SIZE);
+		if (b_read == -1)
+			return (free(buffer), free(left_c), NULL);
+		buffer[b_read] = '\0';
+		temp = left_c;
+		left_c = ft_strjoin(left_c, buffer);
+		free(temp);
+		if (!left_c)
+			return (free(buffer), NULL);
+	}
+	return (free(buffer), left_c);
+}
+
+char	*extract_line(char *left_c)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (!left_c[0])
+		return (NULL);
+	while (left_c[i] && left_c[i] != '\n')
+		i++;
+	if (left_c[i] == '\n')
+		i++;
+	line = ft_substr(left_c, 0, i);
+	return (line);
+}
+
+char	*update_left_c(char *left_c)
+{
+	char	*new_left;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (left_c[i] && left_c[i] != '\n')
+		i++;
+	if (!left_c[i])
+		return (NULL);
+	i++;
+	new_left = (char *)malloc(sizeof(char) * (ft_strlen(left_c) - i + 1));
+	if (!new_left)
+		return (NULL);
+	j = 0;
+	while (left_c[i])
+		new_left[j++] = left_c[i++];
+	new_left[j] = '\0';
+	return (new_left);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*left_c[MAX_FD];
 	char		*line;
-	char		*buffer;
+	char		*temp;
 
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(left_c[fd]);
-		free(buffer);
 		left_c[fd] = NULL;
-		buffer = NULL;
-		return (0);
+		return (NULL);
 	}
-	if (!buffer)
+	left_c[fd] = fill_line_buffer(fd, left_c[fd]);
+	if (!left_c[fd])
 		return (NULL);
-	line = fill_line_buffer(fd, left_c[fd], buffer);
-	free(buffer);
-	buffer = NULL;
+	line = extract_line(left_c[fd]);
 	if (!line)
+	{
+		free(left_c[fd]);
+		left_c[fd] = NULL;
 		return (NULL);
-	left_c[fd] = set_line(line);
+	}
+	temp = left_c[fd];
+	left_c[fd] = update_left_c(left_c[fd]);
+	free(temp);
 	return (line);
 }
 
-char	*set_line(char *line_buffer)
+/* int main()
 {
-	char	*left_c;
-	ssize_t	i;
+	int fd1 = open("test.txt", O_RDONLY);
+	int fd2 = open("test1.txt", O_RDONLY);
 
-	i = 0;
-	while (line_buffer[i] != '\n' && line_buffer[i] != '\0')
-		i++;
-	if (line_buffer[i] == 0 || line_buffer[1] == 0)
-		return (0);
-	left_c = ft_substr(line_buffer, i + 1, ft_strlen(line_buffer) - i);
-	if (*left_c == 0)
-	{
-		free(left_c);
-		left_c = NULL;
-	}
-	line_buffer[i + 1] = 0;
-	return (left_c);
-}
+	char *line1 = get_next_line(fd1);
+	char *line2 = get_next_line(fd2);
 
-char	*fill_line_buffer(int fd, char *left_c, char *buffer)
-{
-	ssize_t	b_read;
-	char	*tmp;
-
-	b_read = 1;
-	while (b_read > 0)
-	{
-		b_read = read(fd, buffer, BUFFER_SIZE);
-		if (b_read == -1)
-		{
-			free(left_c);
-			return (0);
-		}
-		else if (b_read == 0)
-			break ;
-		buffer[b_read] = 0;
-		if (!left_c)
-			left_c = ft_strdup("");
-		tmp = left_c;
-		left_c = ft_strjoin(tmp, buffer);
-		free(tmp);
-		tmp = NULL;
-		if (ft_strchr(buffer, '\n'))
-			break ;
-	}
-	return (left_c);
-}
+	printf("%s", line1);
+	printf("%s", line2);
+} */
 
 char	*ft_strchr(char *s, int c)
 {
 	unsigned int	i;
 	char			cc;
 
-	cc = (char)c;
+	cc = (char) c;
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == cc)
-			return ((char *)&s[i]);
+		{
+			return ((char *) &s[i]);
+		}
 		i++;
 	}
 	if (s[i] == cc)
+	{
 		return ((char *)&s[i]);
+	}
 	return (NULL);
 }
-
-/* int main()
-{
-	int fd;
-	int fd1;
-
-	fd = open("test.txt", O_RDONLY);
-	fd1 = open("test1.txt", O_RDONLY);
-
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-
-	printf("%s", get_next_line(fd1));
-	printf("%s", get_next_line(fd1));
-
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-} */
